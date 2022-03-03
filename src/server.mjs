@@ -1,7 +1,7 @@
 import querystring from 'querystring';
 
 // initializes and paresed the request
-export default ({debug} = {}) => {
+export default ({ debug } = {}) => {
 
     // catch all uncaught errors
     process.on('uncaughtException', error => {
@@ -10,16 +10,16 @@ export default ({debug} = {}) => {
         console.log("\n");
 
         // if debug has been set also show the error
-        if(debug === true) console.log(error);
+        if (debug === true) console.log(error);
     });
 
     // parse request
     // TODO make keys Camelcase
-    const req = {...process.env, query: querystring.decode(process.env.QUERY_STRING)};
+    const req = { ...process.env, query: querystring.decode(process.env.QUERY_STRING) };
 
-    const res = {send};
+    const res = { send };
 
-    return {req, res};
+    return { req, res };
 
 
 }
@@ -29,18 +29,19 @@ export const send = (body, headers) => {
 
     // TODO Make header setting also possible with camel case
 
-    // create status from statuscode
-    if (headers.statusCode) {
-
-        // TODO map status code number to real
-        // header["Status"] = ...
-
-        // remove the pure statusCode from header object
-        delete headers.statusCode;
-    }
 
     // set headers
     if (headers) {
+        // create status from statuscode
+        if (headers.statusCode) {
+
+            // TODO map status code number to real
+            // header["Status"] = ...
+
+            // remove the pure statusCode from header object
+            delete headers.statusCode;
+        }
+
         for (let key of Object.keys(headers)) {
             console.log(`${key}: ${headers[key]}\n`)
         }
