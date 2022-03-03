@@ -32,9 +32,10 @@ export const send = (body, headers) => {
     // create status from statuscode
     if (headers.statusCode) {
 
-        // TODO
+        // TODO map status code number to real
+        // header["Status"] = ...
 
-        // remove it again
+        // remove the pure statusCode from header object
         delete headers.statusCode;
     }
 
@@ -48,32 +49,10 @@ export const send = (body, headers) => {
         console.log("Content-type: text/html\n");
     }
 
-}
+    if (body) console.log(body);
 
-
-
-
-
-const resolve = (body, headers) => {
-
-
-
-
-    // spacing between headers and body
-    console.log("\n");
-
-    // render body
-
-    console.log(body);
+    // terminate script, since execution is complete once everything has been sent
+    process.exit(1);
 
 }
-
-// process.env.replaceAll(/\s([A-Z_]{1,})[:]{1,1}/g, " '$1':");
-
-//const request = {...process.env, query: querystring.decode(process.env.QUERY_STRING)};
-
-
-resolve("hello world");
-
-
 
