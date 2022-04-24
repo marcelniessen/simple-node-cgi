@@ -1,16 +1,18 @@
 import querystring from 'querystring';
 
+const write = process.stdout.write;
+
 // initializes and paresed the request
-export default ({ debug } = {}) => {
+const server = ({ debug } = {}) => {
 
     // catch all uncaught errors
     process.on('uncaughtException', error => {
-        console.log("Status: 500 Internal Server Error\n");
-        console.log("Content-type: text/html\n");
-        console.log("\n");
+        write("Status: 500 Internal Server Error\n");
+        write("Content-type: text/html\n");
+        write("\n");
 
         // if debug has been set also show the error
-        if (debug === true) console.log(error);
+        if (debug === true) write(error);
     });
 
     // parse request
@@ -36,7 +38,7 @@ export const send = (body, headers) => {
         if (headers.statusCode) {
 
             // TODO map status code number to real
-            // header["Status"] = ...
+            headers["Status"] = headers.statusCode;
 
             // remove the pure statusCode from header object
             delete headers.statusCode;
@@ -47,13 +49,24 @@ export const send = (body, headers) => {
         }
     } else {
         // no headers have been provided, set default
-        console.log("Content-type: text/html\n");
+        write("Content-type: text/html\n\n");
     }
 
-    if (body) console.log(body);
+    if (body) write(body);
 
     // terminate script, since execution is complete once everything has been sent
     process.exit(1);
 
 }
+
+
+// TODO 
+export const sendFile = (file) => {
+
+
+}
+
+
+export default server;
+module.exports = server;
 

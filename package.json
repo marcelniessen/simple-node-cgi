@@ -1,7 +1,7 @@
 {
   "name": "simple-node-cgi",
   "version": "1.0.0",
-  "description": "CGI helper to run nodejs scripts on your Apache Server",
+  "description": "CGI helper to run your scripts on a Apache Server with ease",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

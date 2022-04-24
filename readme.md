@@ -16,7 +16,7 @@ There are a lot of ways to make this work. I'll explain here the method I reagar
 Install node Version > `TODO` on your webserver. https://nodejs.org/
 
 ## Step 2
-Install `simple-node-cgi` globally by running `sudo npm install -g simple-node-cgi`
+Install `simple-node-cgi` by running `npm install simple-node-cgi`
 
 ## Step 3
 Create a file named `.htaccess` at the root of your html directory and add these lines to activate `simple-node-cgi`
@@ -95,10 +95,11 @@ These are the next items which have to be done
 - block public access to all folders called `node_modules` by entry in `.htaccess` file
 - create compatibilty with `require()` as well
 
-# License
+# License MIT
 
 ```
 Begin license text.
+
 Copyright 2022 Marcel Frederik Niessen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
