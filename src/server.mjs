@@ -83,12 +83,6 @@ export const send = (body, headers) => {
 
     // TODO Make header setting also possible with camel case
 
-    let contentType = "text/html";
-    if (headers["Content-Type"]) {
-        contentType = headers["Content-Type"];
-        delete headers["Content-Type"];
-    }
-
 
     // write custom status code
     if (headers.statusCode) {
@@ -100,46 +94,20 @@ export const send = (body, headers) => {
         delete headers.statusCode;
     }
 
-
+    let contentType = "text/html";
+    if (headers["Content-Type"]) {
+        contentType = headers["Content-Type"];
+        delete headers["Content-Type"];
+    }
 
     // write rest of custom headers;
     for (let key of Object.keys(headers)) {
         process.stdout.write(`${key}: ${headers[key]}\n`);
     }
 
-
     process.stdout.write("Content-Type: " + contentType + "\n\n");
 
-
-
-    // set headers
-    // if (headers) {
-    //     // create status from statuscode
-    //     if (headers.statusCode) {
-
-    //         // TODO map status code number to real
-    //         headers["Status"] = String(headers.statusCode) + "Code Description";
-
-    //         // remove the pure statusCode from header object
-    //         delete headers.statusCode;
-    //     }
-
-
-
-    //     for (let key of Object.keys(headers)) {
-    //         write(`${key}: ${headers[key]}\n`);
-    //     }
-    // } else {
-    //     // no headers have been provided, set default
-    //     write("Content-Type: text/html\n\n");
-    // }
-
-
-    //  process.stdout.write("Content-Type: image/png\n\n");
-
     process.stdout.write(body);
-
-    // res.send(file)
 
     process.exit(1);
 
