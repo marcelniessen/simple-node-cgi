@@ -1,5 +1,7 @@
 import querystring from 'querystring';
 
+import fs from 'fs';
+
 
 const getStatusText = (code) => {
 
@@ -53,6 +55,24 @@ const getStatusText = (code) => {
 
 }
 
+export const getFilnameFromUri = (uri) => {
+
+    if (!uri) return "";
+
+    const matchGroups = uri.match(/(?<=\/)[^\/\?#]+(?=[^\/]*$)/);
+
+
+    let filename = "";
+
+    if (matchGroups && matchGroups.length) {
+        filename = matchGroups[0]
+    }
+
+    return filename;
+
+
+}
+
 // initializes and paresed the request
 const server = ({ debug } = {}) => {
 
@@ -67,11 +87,11 @@ const server = ({ debug } = {}) => {
 
     // parse request
     // TODO make keys Camelcase
-    const req = { ...process.env, query: querystring.decode(process.env.QUERY_STRING) };
+    const req = { ...process.env, query: querystring.decode(process.env.QUERY_STRING), body: fs.readFileSync(0, "utf-8")};
 
     const res = { send };
 
-    return { req, res };
+    return { req, res, getFilnameFromUri };
 
 
 }
